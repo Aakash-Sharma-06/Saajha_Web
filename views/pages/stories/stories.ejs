@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/output.css" />
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+  <%- include('../../partials/header') %>
+  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+      <h1 class="mb-6 text-2xl font-semibold text-slate-900">हिंदी कहानियाँ</h1>
+      <form class="mb-6 flex flex-wrap gap-3" method="GET" action="/stories">
+        <input class="flex-1 min-w-55 rounded-xl border border-slate-200 px-4 py-3" type="text" name="q" value="<%= search %>" placeholder="कहानी का शीर्षक खोजें" />
+        <button class="rounded-full bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-700" type="submit">खोजें</button>
+      </form>
+      <div class="grid gap-4 md:grid-cols-2">
+        <% stories.forEach((story) => { %>
+          <a class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md" href="/stories/<%= story._id %>">
+            <h3 class="font-semibold text-slate-900"><%= story.title %></h3>
+            <p class="mt-2 text-sm text-slate-600"><%= story.summary %></p>
+            <span class="mt-4 inline-flex rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700"><%= story.category %></span>
+          </a>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
