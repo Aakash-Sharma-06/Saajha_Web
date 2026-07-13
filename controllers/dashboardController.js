@@ -20,8 +20,6 @@ exports.renderDashboard = async (req, res, next, models) => {
           recentActivities = await ActivityLog.find({ user: selectedStudent._id }).sort({ createdAt: -1 }).limit(12);
         }
       }
-    } else {
-      recentActivities = await ActivityLog.find({ user: req.session.user._id }).sort({ createdAt: -1 }).limit(8);
     }
 
     const storyCount = await Story.countDocuments();
@@ -44,6 +42,11 @@ exports.renderDashboard = async (req, res, next, models) => {
 exports.renderActivity = async (req, res, next, models) => {
   try {
     const { ActivityLog } = models;
+
+    if (req.session.user.role !== 'host') {
+      return res.redirect('/dashboard');
+    }
+
     const activities = await ActivityLog.find({ user: req.session.user._id }).sort({ createdAt: -1 });
     res.render('pages/dashboard/activity', { title: 'गतिविधि', activities });
   } catch (error) {

@@ -5,7 +5,9 @@
       <a class="transition hover:text-indigo-600" href="/dashboard">डैशबोर्ड</a>
       <a class="transition hover:text-indigo-600" href="/stories">कहानियाँ</a>
       <a class="transition hover:text-indigo-600" href="/math">गणित</a>
-      <a class="transition hover:text-indigo-600" href="/activity">गतिविधि</a>
+      <% if (user && user.role === 'host') { %>
+        <a class="transition hover:text-indigo-600" href="/activity">गतिविधि</a>
+      <% } %>
       <a class="rounded-full bg-slate-100 px-3 py-1.5 transition hover:bg-slate-200" href="/logout">लॉगआउट</a>
     </nav>
   </div>
