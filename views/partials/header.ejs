@@ -1,14 +1,43 @@
-<header class="sticky top-0 z-10 border-b border-slate-200 bg-white/90 px-4 py-4 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between">
-    <a class="text-lg font-bold text-indigo-600" href="/dashboard">📘 Saajha</a>
-    <nav class="flex flex-wrap items-center gap-3 text-sm font-medium text-slate-700">
-      <a class="transition hover:text-indigo-600" href="/dashboard">डैशबोर्ड</a>
-      <a class="transition hover:text-indigo-600" href="/stories">कहानियाँ</a>
-      <a class="transition hover:text-indigo-600" href="/math">गणित</a>
-      <% if (user && user.role === 'host') { %>
-        <a class="transition hover:text-indigo-600" href="/activity">गतिविधि</a>
+<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+
+    <!-- Logo -->
+    <a href="/dashboard" class="flex items-center gap-3">
+      <img
+        src="/image.png"
+        alt="Saajha Logo"
+        class="h-12  w-auto object-contain border border-slate-200 shadow-md flex-shrink-0"
+      />
+      <!-- <span class="text-xl font-bold text-slate-900">Saajha</span> -->
+    </a>
+
+    <!-- Navigation -->
+    <nav class="flex items-center gap-6 text-sm font-medium text-slate-700">
+      <a href="/dashboard" class="hover:text-amber-600 transition-colors">
+        डैशबोर्ड
+      </a>
+
+      <a href="/stories" class="hover:text-amber-600 transition-colors">
+        कहानियाँ
+      </a>
+
+      <a href="/math" class="hover:text-amber-600 transition-colors">
+        गणित
+      </a>
+
+      <% if (user && user.role === "host") { %>
+        <a href="/activity" class="hover:text-amber-600 transition-colors">
+          गतिविधि
+        </a>
       <% } %>
-      <a class="rounded-full bg-slate-100 px-3 py-1.5 transition hover:bg-slate-200" href="/logout">लॉगआउट</a>
+
+      <a
+        href="/logout"
+        class="rounded-full bg-amber-500 px-4 py-2 text-white hover:bg-amber-600 transition-colors"
+      >
+        लॉगआउट
+      </a>
     </nav>
+
   </div>
 </header>
