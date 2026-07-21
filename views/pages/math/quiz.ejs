@@ -6,24 +6,94 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/output.css" />
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800">
+<body class="min-h-screen text-slate-800 relative pb-12">
+
+  <!-- Background Ornaments -->
+  <svg class="floating-star select-none" style="top: 10%; right: 6%; fill: #facc15;" width="36" height="36" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+  <svg class="floating-star select-none" style="bottom: 15%; left: 5%; fill: #ec4899;" width="30" height="30" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+
   <%- include('../../partials/header') %>
-  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-    <form class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm" method="POST" action="/math/quiz/submit">
-      <h1 class="mb-6 text-2xl font-semibold text-slate-900">अभ्यास क्विज़</h1>
-      <% questions.forEach((question, index) => { %>
-        <div class="border-b border-slate-100 py-5 last:border-0">
-          <h3 class="mb-3 font-semibold text-slate-800"><%= index + 1 %>. <%= question.prompt %></h3>
-          <% question.options.forEach((option) => { %>
-            <label class="mb-2 flex items-center gap-2 text-slate-700">
-              <input type="radio" name="answer-<%= question._id %>" value="<%= option %>" required />
-              <span><%= option %></span>
-            </label>
-          <% }) %>
+
+  <main class="mx-auto max-w-3xl px-4 py-8 sm:px-6 fade-in-page">
+    
+    <form class="bubbly-card bg-white p-6 sm:p-10 shadow-[0_8px_0_#1e293b]" method="POST" action="/math/quiz/submit">
+      
+      <div class="flex items-center justify-between border-b-3 border-dashed border-slate-300 pb-5 mb-6">
+        <div>
+          <h1 class="text-3xl font-black text-slate-900 flex items-center gap-2">
+            <span>📝</span> अभ्यास क्विज़
+          </h1>
+          <p class="text-slate-500 font-semibold mt-1">सभी प्रश्नों को ध्यान से पढ़ें और सही उत्तर चुनें!</p>
         </div>
-      <% }) %>
-      <button class="mt-6 rounded-full bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-700" type="submit">जमा करें</button>
+        <div class="text-4xl animate-bounce-soft select-none">🧩</div>
+      </div>
+
+      <!-- Questions Loop -->
+      <div class="space-y-8">
+        <% questions.forEach((question, index) => { %>
+          <div class="p-6 rounded-3xl border-3 border-slate-900 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+            
+            <!-- Question Header -->
+            <div class="flex items-center gap-2 mb-4">
+              <span class="inline-flex rounded-full bg-pastel-yellow border-2 border-slate-900 px-3 py-1 text-xs font-black text-slate-800">
+                प्रश्न <%= index + 1 %>
+              </span>
+              <h3 class="font-extrabold text-slate-800 text-lg sm:text-xl leading-relaxed">
+                <%= question.prompt %>
+              </h3>
+            </div>
+
+            <!-- Question Options -->
+            <div class="grid gap-3 sm:grid-cols-2 mt-4">
+              <% question.options.forEach((option) => { %>
+                <label class="option-bubble hover-ripple">
+                  <input 
+                    type="radio" 
+                    name="answer-<%= question._id %>" 
+                    value="<%= option %>" 
+                    required 
+                  />
+                  <span class="text-slate-800 font-bold text-base"><%= option %></span>
+                </label>
+              <% }) %>
+            </div>
+
+          </div>
+        <% }) %>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 pt-6 border-t-3 border-dashed border-slate-300 flex items-center justify-between gap-4">
+        <a href="/math" class="btn-bubbly btn-bubbly-orange px-6 py-3.5 text-white shadow-[0_4px_0_#1e293b]">
+          ❌ रद्द करें
+        </a>
+        <button class="btn-bubbly btn-bubbly-indigo px-8 py-3.5 text-white shadow-[0_4px_0_#1e293b]" type="submit">
+          जमा करें 🚀
+        </button>
+      </div>
+
     </form>
   </main>
+
+  <script>
+    // Handle dynamic color changes on Option Bubble click
+    document.querySelectorAll('.option-bubble input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const name = radio.getAttribute('name');
+        // Remove class from all sibling options
+        document.querySelectorAll(`input[name="${name}"]`).forEach(siblingRadio => {
+          siblingRadio.closest('.option-bubble').classList.remove('selected');
+        });
+        // Add class to active selection
+        if (radio.checked) {
+          radio.closest('.option-bubble').classList.add('selected');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

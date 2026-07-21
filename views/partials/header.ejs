@@ -1,40 +1,40 @@
-<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+<header class="sticky top-0 z-50 border-b-3 border-slate-900 bg-white/95 backdrop-blur rounded-b-[2rem] shadow-[0_4px_10px_rgba(0,0,0,0.03)] transition-all">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
 
     <!-- Logo -->
-    <a href="/dashboard" class="flex items-center">
-  <img
-    src="/image.png"
-    alt="Saajha Logo"
-    class="h-12 w-auto object-contain shrink-0"
-  />
-</a>
+    <a href="/dashboard" class="flex items-center group">
+      <img
+        src="/image.png"
+        alt="Saajha Logo"
+        class="h-12 w-auto object-contain shrink-0 transition-transform group-hover:scale-110 duration-200"
+      />
+    </a>
 
     <!-- Navigation -->
-    <nav class="flex items-center gap-6 text-sm font-medium text-slate-700">
-      <a href="/dashboard" class="hover:text-amber-600 transition-colors">
-        डैशबोर्ड
+    <nav class="flex items-center gap-3 sm:gap-5 text-sm sm:text-base font-extrabold text-slate-800">
+      <a href="/dashboard" class="flex items-center gap-1 px-3.5 py-1.5 rounded-full border-2 border-transparent hover:border-slate-900 hover:bg-pastel-yellow transition-all">
+        <span>🏠</span> <span class="hidden sm:inline">डैशबोर्ड</span>
       </a>
 
-      <a href="/stories" class="hover:text-amber-600 transition-colors">
-        कहानियाँ
+      <a href="/stories" class="flex items-center gap-1 px-3.5 py-1.5 rounded-full border-2 border-transparent hover:border-slate-900 hover:bg-pastel-pink transition-all">
+        <span>📚</span> <span class="hidden sm:inline">कहानियाँ</span>
       </a>
 
-      <a href="/math" class="hover:text-amber-600 transition-colors">
-        गणित
+      <a href="/math" class="flex items-center gap-1 px-3.5 py-1.5 rounded-full border-2 border-transparent hover:border-slate-900 hover:bg-pastel-blue transition-all">
+        <span>🔢</span> <span class="hidden sm:inline">गणित</span>
       </a>
 
       <% if (user && user.role === "host") { %>
-        <a href="/activity" class="hover:text-amber-600 transition-colors">
-          गतिविधि
+        <a href="/activity" class="flex items-center gap-1 px-3.5 py-1.5 rounded-full border-2 border-transparent hover:border-slate-900 hover:bg-pastel-green transition-all">
+          <span>📊</span> <span class="hidden sm:inline">गतिविधि</span>
         </a>
       <% } %>
 
       <a
         href="/logout"
-        class="rounded-full bg-amber-500 px-4 py-2 text-white hover:bg-amber-600 transition-colors"
+        class="btn-bubbly btn-bubbly-orange px-4 py-1.5 text-xs sm:text-sm text-white shadow-[0_4px_0_#1e293b] flex items-center gap-1"
       >
-        लॉगआउट
+        <span>🚪</span> लॉगआउट
       </a>
     </nav>
 

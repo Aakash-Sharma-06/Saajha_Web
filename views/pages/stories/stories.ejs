@@ -6,24 +6,113 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/output.css" />
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800">
+<body class="min-h-screen text-slate-800 relative pb-12">
+
+  <!-- Background Ornaments -->
+  <svg class="floating-star select-none" style="top: 15%; left: 8%; fill: #facc15;" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+  <svg class="floating-star select-none" style="top: 35%; right: 6%; fill: #ec4899;" width="28" height="28" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+  <div class="floating-cloud-1 select-none">
+    <svg width="150" height="90" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 40C30 29.06 38.96 20 50 20C55.42 20 60.33 22.15 63.95 25.62C67.31 22.12 72.06 20 77.27 20C88.31 20 97.27 29.06 97.27 40C97.27 40.85 97.22 41.69 97.12 42.52C104.38 43.61 110 49.9 110 57.5C110 65.51 103.51 72 95.5 72H24.5C16.49 72 10 65.51 10 57.5C10 49.9 15.62 43.61 22.88 42.52C22.78 41.69 22.73 40.85 22.73 40C22.73 29.06 31.69 20 42.73 20" fill="white" fill-opacity="0.8"/>
+    </svg>
+  </div>
+
   <%- include('../../partials/header') %>
-  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-    <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-      <h1 class="mb-6 text-2xl font-semibold text-slate-900">हिंदी कहानियाँ</h1>
-      <form class="mb-6 flex flex-wrap gap-3" method="GET" action="/stories">
-        <input class="flex-1 min-w-55 rounded-xl border border-slate-200 px-4 py-3" type="text" name="q" value="<%= search %>" placeholder="कहानी का शीर्षक खोजें" />
-        <button class="rounded-full bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-700" type="submit">खोजें</button>
-      </form>
-      <div class="grid gap-4 md:grid-cols-2">
-        <% stories.forEach((story) => { %>
-          <a class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md" href="/stories/<%= story._id %>">
-            <h3 class="font-semibold text-slate-900"><%= story.title %></h3>
-            <p class="mt-2 text-sm text-slate-600"><%= story.summary %></p>
-            <span class="mt-4 inline-flex rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700"><%= story.category %></span>
-          </a>
-        <% }) %>
+
+  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 fade-in-page">
+    <section class="rounded-3xl border-3 border-slate-900 bg-white p-6 sm:p-8 shadow-[0_8px_0_#1e293b]">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-3xl font-black text-slate-900 flex items-center gap-2">
+            <span>📖</span> हिंदी कहानियाँ
+          </h1>
+          <p class="text-slate-500 font-semibold mt-1">अपनी मनपसंद कहानी खोजें और रोमांचक सफर पर चलें!</p>
+        </div>
+        <div class="text-4xl animate-bounce-soft select-none self-start sm:self-auto">📚</div>
       </div>
+
+      <!-- Search Form -->
+      <form class="mb-8 flex flex-wrap gap-3" method="GET" action="/stories">
+        <input 
+          class="flex-1 min-w-55" 
+          type="text" 
+          name="q" 
+          value="<%= search %>" 
+          placeholder="कहानी का शीर्षक या नाम खोजें..." 
+        />
+        <button class="btn-bubbly btn-bubbly-yellow px-6 py-3 shadow-[0_4px_0_#1e293b]" type="submit">
+          खोजें 🔎
+        </button>
+      </form>
+
+      <!-- Stories Grid -->
+      <% if (stories.length === 0) { %>
+        <div class="text-center py-12">
+          <span class="text-5xl select-none">🧐</span>
+          <h3 class="text-xl font-bold text-slate-700 mt-4">कोई कहानी नहीं मिली!</h3>
+          <p class="text-slate-500 font-semibold mt-1">कुछ और खोज कर देखें या वापस जाएँ।</p>
+          <a href="/stories" class="btn-bubbly btn-bubbly-indigo px-6 py-2.5 mt-4 text-white text-sm shadow-[0_4px_0_#1e293b]">सभी कहानियाँ देखें</a>
+        </div>
+      <% } else { %>
+        <div class="grid gap-6 md:grid-cols-2">
+          <% stories.forEach((story) => { 
+            // Determine pastel color theme based on category
+            let bgTheme = 'bg-pastel-orange';
+            let borderTheme = 'border-orange-300';
+            let pillTheme = 'bg-orange-200 text-orange-800 border-orange-400';
+            let btnTheme = 'btn-bubbly-orange';
+            
+            if (story.category === 'ज्ञानवर्धक' || story.category === 'शिक्षाप्रद') {
+              bgTheme = 'bg-pastel-green';
+              borderTheme = 'border-emerald-300';
+              pillTheme = 'bg-emerald-200 text-emerald-800 border-emerald-400';
+              btnTheme = 'btn-bubbly-green';
+            } else if (story.category === 'लोककथा' || story.category === 'पौराणिक') {
+              bgTheme = 'bg-pastel-blue';
+              borderTheme = 'border-sky-300';
+              pillTheme = 'bg-sky-200 text-sky-800 border-sky-400';
+              btnTheme = 'btn-bubbly-indigo';
+            } else if (story.category === 'हास्य' || story.category === 'मजेदार') {
+              bgTheme = 'bg-pastel-yellow';
+              borderTheme = 'border-amber-300';
+              pillTheme = 'bg-amber-200 text-amber-800 border-amber-400';
+              btnTheme = 'btn-bubbly-yellow';
+            }
+          %>
+            <a 
+              class="bubbly-card <%= bgTheme %> hover:-translate-y-2 hover:scale-[1.01] p-6 shadow-[0_6px_0_#1e293b] flex flex-col justify-between min-h-[200px] transition-transform duration-250" 
+              href="/stories/<%= story._id %>"
+            >
+              <div>
+                <div class="flex items-start justify-between gap-3">
+                  <h3 class="text-xl font-black text-slate-900 tracking-tight leading-snug"><%= story.title %></h3>
+                  <span class="inline-block rounded-full border px-2.5 py-0.5 text-xs font-bold shrink-0 <%= pillTheme %>">
+                    <%= story.category %>
+                  </span>
+                </div>
+                <p class="mt-3 text-sm font-semibold text-slate-600 line-clamp-2 leading-relaxed">
+                  <%= story.summary %>
+                </p>
+              </div>
+
+              <div class="mt-6 flex items-center justify-between">
+                <span class="text-sm font-bold text-slate-500 flex items-center gap-1">
+                  <span>🕒</span> <%= new Date(story.createdAt).toLocaleDateString('hi-IN') %>
+                </span>
+                <span class="btn-bubbly <%= btnTheme %> px-4 py-1.5 text-sm shadow-[0_4px_0_#1e293b] text-white">
+                  कहानी पढ़ें 📖
+                </span>
+              </div>
+            </a>
+          <% }) %>
+        </div>
+      <% } %>
+
     </section>
   </main>
 </body>

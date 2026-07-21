@@ -6,28 +6,90 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/output.css" />
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800">
-  <div class="flex min-h-screen items-center justify-center bg-linear-to-br from-indigo-50 via-white to-slate-100 px-4 py-8">
-    <form class="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-8 shadow-xl" method="POST" action="/register">
-      <h2 class="mb-6 text-2xl font-bold text-slate-900">रजिस्टर</h2>
+<body class="min-h-screen relative overflow-x-hidden text-slate-800 flex items-center justify-center py-10 px-4">
+
+  <!-- Background decorations -->
+  <div class="floating-cloud-1 select-none">
+    <svg width="150" height="90" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 40C30 29.06 38.96 20 50 20C55.42 20 60.33 22.15 63.95 25.62C67.31 22.12 72.06 20 77.27 20C88.31 20 97.27 29.06 97.27 40C97.27 40.85 97.22 41.69 97.12 42.52C104.38 43.61 110 49.9 110 57.5C110 65.51 103.51 72 95.5 72H24.5C16.49 72 10 65.51 10 57.5C10 49.9 15.62 43.61 22.88 42.52C22.78 41.69 22.73 40.85 22.73 40C22.73 29.06 31.69 20 42.73 20" fill="white" fill-opacity="0.85"/>
+    </svg>
+  </div>
+  <svg class="floating-star select-none" style="top: 15%; right: 12%; fill: #38bdf8;" width="32" height="32" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+  <svg class="floating-star select-none" style="bottom: 10%; left: 8%; fill: #a855f7;" width="28" height="28" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+
+  <div class="w-full max-w-md fade-in-page">
+    <div class="text-center mb-6">
+      <a href="/">
+        <img
+          src="/image.png"
+          alt="Saajha Logo"
+          class="h-16 w-auto object-contain mx-auto transition-transform hover:scale-110 duration-200"
+        />
+      </a>
+    </div>
+
+    <form class="bubbly-card bg-white p-8 shadow-[0_8px_0_#1e293b] flex flex-col gap-4" method="POST" action="/register">
+      <div class="text-center">
+        <h2 class="text-3xl font-black text-slate-900">रजिस्टर करें 🚀</h2>
+        <p class="text-sm font-semibold text-slate-500 mt-1">अपना नया सीखने का खाता बनाएं</p>
+      </div>
+
       <% if (typeof error !== 'undefined' && error) { %>
-        <p class="mb-4 rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-600"><%= error %></p>
+        <p class="rounded-2xl border-3 border-rose-900 bg-rose-100 px-4 py-2.5 text-sm font-bold text-rose-800 shadow-[0_4px_0_#e11d48] flex items-center gap-2">
+          <span>⚠️</span> <%= error %>
+        </p>
       <% } %>
-      <label class="mb-2 block text-sm font-semibold text-slate-700">भूमिका</label>
-      <select class="mb-4 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-indigo-400" name="role">
-        <option value="student">स्टूडेंट</option>
-        <option value="host">होस्ट</option>
-      </select>
-      <label class="mb-2 block text-sm font-semibold text-slate-700">नाम</label>
-      <input class="mb-4 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none ring-0 focus:border-indigo-400" type="text" name="name" required />
-      <label class="mb-2 block text-sm font-semibold text-slate-700">ईमेल</label>
-      <input class="mb-4 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none ring-0 focus:border-indigo-400" type="email" name="email" required />
-      <label class="mb-2 block text-sm font-semibold text-slate-700">फोन नंबर</label>
-      <input class="mb-4 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none ring-0 focus:border-indigo-400" type="tel" name="phone" />
-      <label class="mb-2 block text-sm font-semibold text-slate-700">पासवर्ड</label>
-      <input class="mb-5 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none ring-0 focus:border-indigo-400" type="password" name="password" required />
-      <button class="w-full rounded-full bg-indigo-600 px-4 py-3 font-semibold text-white transition hover:bg-indigo-700" type="submit">खाता बनाएं</button>
-      <p class="mt-4 text-sm text-slate-600">पहले से खाता है? <a class="font-semibold text-indigo-600 hover:text-indigo-700" href="/login">लॉगिन</a></p>
+
+      <div>
+        <label class="mb-1.5 block text-sm font-bold text-slate-700 flex items-center gap-1.5">
+          <span>👦</span> भूमिका चुनें
+        </label>
+        <select class="w-full" name="role" required>
+          <option value="student">स्टूडेंट (Student)</option>
+          <option value="host">होस्ट (Host)</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="mb-1.5 block text-sm font-bold text-slate-700 flex items-center gap-1.5">
+          <span>📝</span> नाम
+        </label>
+        <input class="w-full" type="text" name="name" placeholder="अपना नाम लिखें" required />
+      </div>
+
+      <div>
+        <label class="mb-1.5 block text-sm font-bold text-slate-700 flex items-center gap-1.5">
+          <span>📧</span> ईमेल
+        </label>
+        <input class="w-full" type="email" name="email" placeholder="अपना ईमेल लिखें" required />
+      </div>
+
+      <div>
+        <label class="mb-1.5 block text-sm font-bold text-slate-700 flex items-center gap-1.5">
+          <span>📞</span> फोन नंबर
+        </label>
+        <input class="w-full" type="tel" name="phone" placeholder="अपना फोन नंबर लिखें (वैकल्पिक)" />
+      </div>
+
+      <div>
+        <label class="mb-1.5 block text-sm font-bold text-slate-700 flex items-center gap-1.5">
+          <span>🔒</span> पासवर्ड
+        </label>
+        <input class="w-full" type="password" name="password" placeholder="एक मजबूत पासवर्ड बनाएं" required />
+      </div>
+
+      <button class="btn-bubbly btn-bubbly-indigo w-full py-4 text-white text-base shadow-[0_6px_0_#1e293b] mt-3" type="submit">
+        खाता बनाएं ✨
+      </button>
+
+      <div class="mt-2 text-center text-sm font-bold text-slate-500">
+        पहले से खाता है? 
+        <a class="text-kid-primary hover:underline decoration-2" href="/login">लॉगिन करें</a>
+      </div>
     </form>
   </div>
 </body>

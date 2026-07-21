@@ -6,31 +6,83 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/output.css" />
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800">
+<body class="min-h-screen text-slate-800 relative pb-12">
+
+  <!-- Background Floating Ornaments -->
+  <svg class="floating-star select-none" style="top: 15%; left: 8%; fill: #facc15;" width="36" height="36" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+  <svg class="floating-star select-none" style="bottom: 25%; right: 7%; fill: #f472b6;" width="30" height="30" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
+  <div class="floating-cloud-1 select-none">
+    <svg width="150" height="90" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 40C30 29.06 38.96 20 50 20C55.42 20 60.33 22.15 63.95 25.62C67.31 22.12 72.06 20 77.27 20C88.31 20 97.27 29.06 97.27 40C97.27 40.85 97.22 41.69 97.12 42.52C104.38 43.61 110 49.9 110 57.5C110 65.51 103.51 72 95.5 72H24.5C16.49 72 10 65.51 10 57.5C10 49.9 15.62 43.61 22.88 42.52C22.78 41.69 22.73 40.85 22.73 40C22.73 29.06 31.69 20 42.73 20" fill="white" fill-opacity="0.8"/>
+    </svg>
+  </div>
+
+  <!-- Big floaty math icons -->
+  <span class="floating-pencil text-5xl opacity-40 select-none" style="top: 20%; right: 12%;">➕</span>
+  <span class="floating-book text-5xl opacity-40 select-none" style="bottom: 15%; left: 10%;">➖</span>
+  <span class="floating-pencil text-5xl opacity-30 select-none" style="top: 55%; left: 8%;">✖️</span>
+  <span class="floating-book text-5xl opacity-30 select-none" style="bottom: 45%; right: 15%;">➗</span>
+
   <%- include('../../partials/header') %>
-  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-    <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-      <h1 class="mb-6 text-2xl font-semibold text-slate-900">गणित अभ्यास</h1>
-      <form method="GET" action="/math/quiz" class="flex flex-wrap gap-3">
-        <select class="rounded-xl border border-slate-200 px-4 py-3" name="category">
-          <option value="">सभी श्रेणियाँ</option>
-          <% categories.forEach((category) => { %>
-            <option value="<%= category %>"><%= category %></option>
-          <% }) %>
-        </select>
-        <select class="rounded-xl border border-slate-200 px-4 py-3" name="difficulty">
-          <option value="">सभी कठिनाइयाँ</option>
-          <% difficulties.forEach((difficulty) => { %>
-            <option value="<%= difficulty %>"><%= difficulty %></option>
-          <% }) %>
-        </select>
-        <select class="rounded-xl border border-slate-200 px-4 py-3" name="classLevel">
-          <option value="">सभी कक्षाएँ</option>
-          <% classLevels.forEach((classLevel) => { %>
-            <option value="<%= classLevel %>"><%= classLevel %></option>
-          <% }) %>
-        </select>
-        <button class="rounded-full bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-700" type="submit">क्विज़ शुरू करें</button>
+
+  <main class="mx-auto max-w-3xl px-4 py-8 sm:px-6 fade-in-page">
+    <section class="bubbly-card bg-white p-6 sm:p-10 shadow-[0_8px_0_#1e293b]">
+      
+      <div class="text-center mb-8">
+        <span class="inline-block rounded-full bg-pastel-blue border-2 border-slate-900 px-4 py-1 text-sm font-black text-slate-800 mb-3 animate-bounce-soft">🎮 गणित का अखाड़ा 🎮</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+          मजेदार गणित अभ्यास
+        </h1>
+        <p class="text-slate-500 font-semibold mt-2">
+          नीचे दिए गए विकल्पों को चुनें और अभ्यास क्विज़ शुरू करें!
+        </p>
+      </div>
+
+      <form method="GET" action="/math/quiz" class="flex flex-col gap-6">
+        
+        <div>
+          <label class="mb-2 block text-base font-bold text-slate-700 flex items-center gap-1.5">
+            <span>🏷️</span> श्रेणी (Category) चुनें
+          </label>
+          <select class="w-full" name="category">
+            <option value="">सभी श्रेणियाँ (All)</option>
+            <% categories.forEach((category) => { %>
+              <option value="<%= category %>"><%= category %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-base font-bold text-slate-700 flex items-center gap-1.5">
+            <span>⚡</span> कठिनाई (Difficulty) चुनें
+          </label>
+          <select class="w-full" name="difficulty">
+            <option value="">सभी कठिनाइयाँ (All)</option>
+            <% difficulties.forEach((difficulty) => { %>
+              <option value="<%= difficulty %>"><%= difficulty %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-base font-bold text-slate-700 flex items-center gap-1.5">
+            <span>🎒</span> कक्षा (Class Level) चुनें
+          </label>
+          <select class="w-full" name="classLevel">
+            <option value="">सभी कक्षाएँ (All)</option>
+            <% classLevels.forEach((classLevel) => { %>
+              <option value="<%= classLevel %>"><%= classLevel %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <button class="btn-bubbly btn-bubbly-green w-full py-4 text-white text-lg shadow-[0_6px_0_#1e293b] mt-4 flex items-center justify-center gap-2" type="submit">
+          <span>🎮</span> क्विज़ शुरू करें 🚀
+        </button>
       </form>
     </section>
   </main>

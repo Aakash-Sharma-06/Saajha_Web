@@ -6,60 +6,90 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/output.css" />
   </head>
-  <body
-    class="min-h-screen bg-linear-to-br from-indigo-50 via-white to-slate-100 text-slate-800"
-  >
-    <div
-      class="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8"
-    >
-      <nav
-        class="mb-10 flex items-center justify-between rounded-full border border-slate-200 bg-white/80 px-5 py-3 shadow-sm backdrop-blur"
-      >
+  <body class="min-h-screen relative overflow-x-hidden text-slate-800">
+    
+    <!-- Background Floating Decorations -->
+    <!-- Clouds -->
+    <div class="floating-cloud-1 select-none">
+      <svg width="180" height="100" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 40C30 29.06 38.96 20 50 20C55.42 20 60.33 22.15 63.95 25.62C67.31 22.12 72.06 20 77.27 20C88.31 20 97.27 29.06 97.27 40C97.27 40.85 97.22 41.69 97.12 42.52C104.38 43.61 110 49.9 110 57.5C110 65.51 103.51 72 95.5 72H24.5C16.49 72 10 65.51 10 57.5C10 49.9 15.62 43.61 22.88 42.52C22.78 41.69 22.73 40.85 22.73 40C22.73 29.06 31.69 20 42.73 20" fill="white" fill-opacity="0.9"/>
+      </svg>
+    </div>
+    <div class="floating-cloud-2 select-none">
+      <svg width="140" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 40C30 29.06 38.96 20 50 20C55.42 20 60.33 22.15 63.95 25.62C67.31 22.12 72.06 20 77.27 20C88.31 20 97.27 29.06 97.27 40C97.27 40.85 97.22 41.69 97.12 42.52C104.38 43.61 110 49.9 110 57.5C110 65.51 103.51 72 95.5 72H24.5C16.49 72 10 65.51 10 57.5C10 49.9 15.62 43.61 22.88 42.52C22.78 41.69 22.73 40.85 22.73 40C22.73 29.06 31.69 20 42.73 20" fill="white" fill-opacity="0.75"/>
+      </svg>
+    </div>
+
+    <!-- Star Ornaments -->
+    <svg class="floating-star select-none" style="top: 15%; right: 15%; fill: #fbbf24;" width="36" height="36" viewBox="0 0 24 24">
+      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+    </svg>
+    <svg class="floating-star select-none" style="top: 65%; left: 10%; fill: #f472b6;" width="28" height="28" viewBox="0 0 24 24">
+      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+    </svg>
+    <svg class="floating-star select-none" style="top: 80%; right: 25%; fill: #38bdf8;" width="32" height="32" viewBox="0 0 24 24">
+      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+    </svg>
+
+    <!-- Book & Pencil Ornaments -->
+    <svg class="floating-book select-none" style="top: 50%; left: 6%; opacity: 0.65;" width="44" height="44" viewBox="0 0 24 24" fill="none">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3.5A1.5 1.5 0 0 0 18.5 2H6.5A2.5 2.5 0 0 0 4 4.5v15z" fill="#ec4899"/>
+      <path d="M6.5 22h13.5v-5H6.5a2.5 2.5 0 0 0-2.5 2.5V20a2 2 0 0 0 2.5 2z" fill="#be185d"/>
+    </svg>
+    <svg class="floating-pencil select-none" style="top: 25%; right: 8%; opacity: 0.65; transform: rotate(35deg);" width="40" height="40" viewBox="0 0 24 24" fill="none">
+      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" fill="#3b82f6"/>
+      <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#1d4ed8"/>
+    </svg>
+
+    <div class="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8 fade-in-page">
+      <!-- Main Navigation -->
+      <nav class="mb-10 flex items-center justify-between rounded-3xl border-3 border-slate-900 bg-white/90 px-6 py-4 shadow-[0_6px_0_#1e293b] backdrop-blur transition-transform hover:scale-[1.01]">
         <img
           src="/image.png"
           alt="Saajha Logo"
           class="h-12 w-auto object-contain shrink-0"
         />
-        <div class="flex gap-4 text-sm font-medium text-slate-700">
-          <a class="transition hover:text-indigo-600" href="/login">लॉगिन</a>
-          <a class="transition hover:text-indigo-600" href="/register"
-            >रजिस्टर</a
-          >
+        <div class="flex items-center gap-4 text-base font-bold text-slate-800">
+          <a class="btn-bubbly btn-bubbly-yellow px-5 py-2 text-sm shadow-[0_4px_0_#1e293b]" href="/login">लॉगिन</a>
+          <a class="btn-bubbly btn-bubbly-indigo px-5 py-2 text-sm text-white shadow-[0_4px_0_#1e293b]" href="/register">रजिस्टर</a>
         </div>
       </nav>
-      <div class="grid flex-1 items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-        <div class="max-w-2xl">
-          <h1
-            class="mb-4 text-4xl font-bold leading-tight text-slate-900 sm:text-5xl"
-          >
-            हिंदी सीखने का एक नया केंद्र
+
+      <!-- Hero Section -->
+      <div class="grid flex-1 items-center gap-8 lg:grid-cols-[1.2fr_0.8fr] py-4">
+        <div class="max-w-2xl text-center lg:text-left">
+          <span class="inline-block rounded-full bg-pastel-yellow border-2 border-slate-900 px-4 py-1.5 text-sm font-bold text-slate-800 mb-4 animate-bounce-soft">✨ सीखने की दुनिया में आपका स्वागत है! ✨</span>
+          <h1 class="mb-6 text-4xl font-extrabold leading-tight text-slate-900 sm:text-6xl tracking-tight">
+            हिंदी सीखने का एक <br><span class="text-kid-primary underline decoration-wavy decoration-kid-yellow decoration-3">नया मजेदार केंद्र</span>
           </h1>
-          <p class="mb-6 text-lg leading-8 text-slate-600">
-            कहानियाँ, गणित अभ्यास और सरल अनुभव के साथ अपने सीखने का सफ़र शुरू
-            करें।
+          <p class="mb-8 text-xl font-medium leading-relaxed text-slate-600">
+            प्यारी कहानियाँ सुनने, मजेदार गणित के सवाल हल करने और अद्भुत गतिविधि रिकॉर्ड के साथ अपने सीखने के सफर को जादुई बनाएं!
           </p>
           <a
-            class="inline-flex rounded-full bg-indigo-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-indigo-700"
+            class="btn-bubbly btn-bubbly-indigo px-8 py-4 text-lg text-white shadow-[0_8px_0_#1e293b] animate-float-fast"
             href="/register"
-            >आज ही शुरू करें</a
+            >आज ही शुरू करें 🚀</a
           >
         </div>
-        <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-lg">
-          <h3 class="mb-4 text-xl font-semibold text-slate-900">
-            क्या मिलेगा?
+
+        <!-- Highlights Card -->
+        <div class="bubbly-card bg-white p-8 max-w-md mx-auto lg:mx-0 shadow-[0_8px_0_#1e293b]">
+          <h3 class="mb-6 text-2xl font-black text-slate-900 flex items-center gap-2">
+            <span>📚</span> क्या-क्या मिलेगा?
           </h3>
-          <ul class="space-y-3 text-slate-600">
-            <li class="flex items-start gap-2">
-              <span class="mt-1 text-indigo-500">•</span
-              ><span>हिंदी कहानियाँ और ऑडियो</span>
+          <ul class="space-y-4 text-lg font-bold text-slate-700">
+            <li class="flex items-center gap-3 bg-pastel-blue p-3.5 border-2 border-slate-900 rounded-2xl">
+              <span class="text-3xl">📖</span>
+              <span>हिंदी कहानियाँ और सुंदर ऑडियो</span>
             </li>
-            <li class="flex items-start gap-2">
-              <span class="mt-1 text-indigo-500">•</span
-              ><span>तत्काल गणित क्विज़</span>
+            <li class="flex items-center gap-3 bg-pastel-green p-3.5 border-2 border-slate-900 rounded-2xl">
+              <span class="text-3xl">🔢</span>
+              <span>मजेदार गणित के अभ्यास क्विज़</span>
             </li>
-            <li class="flex items-start gap-2">
-              <span class="mt-1 text-indigo-500">•</span
-              ><span>सुरक्षित लॉगिन और गतिविधि ट्रैकिंग</span>
+            <li class="flex items-center gap-3 bg-pastel-pink p-3.5 border-2 border-slate-900 rounded-2xl">
+              <span class="text-3xl">🏆</span>
+              <span>सुंदर पदक और गतिविधि ट्रैकिंग</span>
             </li>
           </ul>
         </div>

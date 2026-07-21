@@ -6,56 +6,185 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/output.css" />
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800">
+<body class="min-h-screen text-slate-800 relative pb-12">
+
+  <!-- Background Ornaments for Kids -->
+  <% if (!isHost) { %>
+    <svg class="floating-star select-none" style="top: 15%; left: 5%; fill: #facc15;" width="36" height="36" viewBox="0 0 24 24">
+      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+    </svg>
+    <svg class="floating-star select-none" style="top: 25%; right: 5%; fill: #f472b6;" width="30" height="30" viewBox="0 0 24 24">
+      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+    </svg>
+    <svg class="floating-star select-none" style="bottom: 10%; left: 8%; fill: #38bdf8;" width="32" height="32" viewBox="0 0 24 24">
+      <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+    </svg>
+    <div class="floating-cloud-1 select-none">
+      <svg width="150" height="90" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 40C30 29.06 38.96 20 50 20C55.42 20 60.33 22.15 63.95 25.62C67.31 22.12 72.06 20 77.27 20C88.31 20 97.27 29.06 97.27 40C97.27 40.85 97.22 41.69 97.12 42.52C104.38 43.61 110 49.9 110 57.5C110 65.51 103.51 72 95.5 72H24.5C16.49 72 10 65.51 10 57.5C10 49.9 15.62 43.61 22.88 42.52C22.78 41.69 22.73 40.85 22.73 40C22.73 29.06 31.69 20 42.73 20" fill="white" fill-opacity="0.8"/>
+      </svg>
+    </div>
+  <% } %>
+
   <%- include('../../partials/header') %>
-  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-    <section class="mb-6 rounded-3xl border border-slate-200 bg-linear-to-r from-indigo-600 to-indigo-500 p-8 text-white shadow-lg">
-      <h1 class="text-3xl font-bold">नमस्ते, <%= user.name %>!</h1>
-      <p class="mt-2 text-indigo-100"><%= user.role === 'host' ? 'आप होस्ट मोड में हैं। किसी स्टूडेंट का नाम या फोन नंबर दर्ज करके उसकी गतिविधि देखें।' : 'आप अपने सीखने का सफ़र आज़ाद ढंग से जारी रख सकते हैं।' %></p>
+  
+  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8 fade-in-page">
+    
+    <!-- Welcome banner -->
+    <section class="mb-8 rounded-3xl border-3 border-slate-900 bg-linear-to-r from-kid-primary to-indigo-500 p-6 sm:p-8 text-white shadow-[0_6px_0_#1e293b] relative overflow-hidden">
+      <!-- Decorative circles in banner background -->
+      <div class="absolute -right-10 -top-10 w-40 height-40 bg-white/10 rounded-full"></div>
+      <div class="absolute -left-10 -bottom-10 w-28 height-28 bg-white/10 rounded-full"></div>
+
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="inline-block rounded-full bg-yellow-400 border border-slate-900 px-3.5 py-1 text-xs font-black text-slate-900 mb-3 animate-bounce-soft">
+            <%= isHost ? '👮 होस्ट मोड' : '⭐ स्टूडेंट मोड' %>
+          </span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold flex items-center gap-2">
+            नमस्ते, <%= user.name %>! 👋
+          </h1>
+          <p class="mt-2 text-indigo-100 font-semibold text-base max-w-2xl">
+            <%= isHost ? 'आप होस्ट मोड में हैं। किसी स्टूडेंट का नाम या फोन नंबर दर्ज करके उसकी गतिविधि देखें।' : 'साझा हब में आपका स्वागत है! आज आप क्या नया सीखना चाहते हैं? नीचे से एक विकल्प चुनें!' %>
+          </p>
+        </div>
+        <% if (!isHost) { %>
+          <div class="text-5xl sm:text-6xl animate-float-medium self-start sm:self-auto select-none">
+            🎓
+          </div>
+        <% } %>
+      </div>
     </section>
+
+    <!-- Host Search Form -->
     <% if (isHost) { %>
-      <section class="mb-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="mb-3 text-xl font-semibold text-slate-900">स्टूडेंट गतिविधि देखें</h2>
+      <section class="mb-8 rounded-3xl border-3 border-slate-900 bg-white p-6 shadow-[0_6px_0_#1e293b]">
+        <h2 class="mb-4 text-xl font-bold text-slate-900 flex items-center gap-1.5">
+          <span>🔍</span> स्टूडेंट गतिविधि देखें
+        </h2>
         <form method="GET" action="/dashboard" class="flex flex-wrap gap-3">
-          <input class="min-w-60 flex-1 rounded-xl border border-slate-200 px-4 py-3" type="text" name="search" value="<%= searchTerm %>" placeholder="स्टूडेंट का नाम या फोन नंबर लिखें" />
-          <button class="rounded-full bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-700" type="submit">खोजें</button>
+          <input 
+            class="min-w-60 flex-1" 
+            type="text" 
+            name="search" 
+            value="<%= searchTerm %>" 
+            placeholder="स्टूडेंट का नाम या फोन नंबर लिखें" 
+          />
+          <button class="btn-bubbly btn-bubbly-indigo px-6 py-3 text-white shadow-[0_4px_0_#1e293b]" type="submit">
+            खोजें 🔎
+          </button>
         </form>
         <% if (searchTerm) { %>
           <% if (selectedStudent) { %>
-            <div class="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-700">
+            <div class="mt-4 rounded-2xl border-3 border-emerald-900 bg-emerald-100 p-4 text-sm font-bold text-emerald-800 shadow-[0_4px_0_#065f46]">
               <strong><%= selectedStudent.name %></strong> की गतिविधि दिख रही है। फोन: <%= selectedStudent.phone || 'कोई फोन नहीं' %>
             </div>
           <% } else { %>
-            <div class="mt-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-700">कोई स्टूडेंट नहीं मिला।</div>
+            <div class="mt-4 rounded-2xl border-3 border-amber-900 bg-amber-100 p-4 text-sm font-bold text-amber-800 shadow-[0_4px_0_#92400e]">
+              कोई स्टूडेंट नहीं मिला।
+            </div>
           <% } %>
         <% } %>
       </section>
     <% } %>
-    <section class="mb-6 grid gap-4 md:grid-cols-<%= isHost ? '3' : '2' %>">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">कहानियाँ</h3>
-        <p class="mt-3 text-3xl font-bold text-indigo-600"><%= storyCount %></p>
-      </div>
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">गणित प्रश्न</h3>
-        <p class="mt-3 text-3xl font-bold text-indigo-600"><%= questionCount %></p>
-      </div>
-      <% if (isHost) { %>
-        <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-500">हाल की गतिविधियाँ</h3>
-          <p class="mt-3 text-3xl font-bold text-indigo-600"><%= recentActivities.length %></p>
+
+    <!-- Student Navigation Cards (Interactive Learning Worlds) -->
+    <% if (!isHost) { %>
+      <section class="mb-8 grid gap-6 md:grid-cols-2">
+        <!-- Stories Card -->
+        <a href="/stories" class="bubbly-card bg-pastel-orange hover:bg-orange-100 p-8 flex flex-col justify-between group shadow-[0_8px_0_#1e293b] min-h-[220px]">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="sparkle-badge mb-2">⭐ मनोरंजक कहानियाँ</span>
+              <h3 class="text-2xl font-black text-slate-900 mt-2 group-hover:text-kid-orange transition-colors">
+                कहानियाँ पढ़ें 📖
+              </h3>
+              <p class="mt-2 text-sm font-semibold text-slate-600 max-w-xs">
+                सुंदर चित्रों और आवाज़ के साथ मजेदार हिंदी कहानियाँ सुनें और पढ़ें।
+              </p>
+            </div>
+            <div class="text-5xl group-hover:scale-125 transition-transform duration-300 animate-float-slow select-none">
+              📚
+            </div>
+          </div>
+          <div class="mt-6 flex items-center justify-between">
+            <span class="inline-flex rounded-full bg-white border-2 border-slate-900 px-3.5 py-1 text-xs font-black text-slate-800">
+              कुल कहानियाँ: <%= storyCount %>
+            </span>
+            <span class="btn-bubbly btn-bubbly-orange px-5 py-2 text-sm shadow-[0_4px_0_#1e293b] text-white">
+              चलो चलें 🚀
+            </span>
+          </div>
+        </a>
+
+        <!-- Math Quiz Card -->
+        <a href="/math" class="bubbly-card bg-pastel-blue hover:bg-sky-100 p-8 flex flex-col justify-between group shadow-[0_8px_0_#1e293b] min-h-[220px]">
+          <div class="flex items-start justify-between">
+            <div>
+              <span class="sparkle-badge mb-2">🎯 मजेदार चुनौतियाँ</span>
+              <h3 class="text-2xl font-black text-slate-900 mt-2 group-hover:text-kid-primary transition-colors">
+                गणित खेलें 🔢
+              </h3>
+              <p class="mt-2 text-sm font-semibold text-slate-600 max-w-xs">
+                अपनी कक्षा के अनुसार जोड़, घटाव और अन्य गणित के मजेदार सवाल हल करें।
+              </p>
+            </div>
+            <div class="text-5xl group-hover:scale-125 transition-transform duration-300 animate-float-medium select-none">
+              🧮
+            </div>
+          </div>
+          <div class="mt-6 flex items-center justify-between">
+            <span class="inline-flex rounded-full bg-white border-2 border-slate-900 px-3.5 py-1 text-xs font-black text-slate-800">
+              कुल प्रश्न: <%= questionCount %>
+            </span>
+            <span class="btn-bubbly btn-bubbly-indigo px-5 py-2 text-sm shadow-[0_4px_0_#1e293b] text-white">
+              क्विज़ खेलें 🎮
+            </span>
+          </div>
+        </a>
+      </section>
+    <% } else { %>
+      <!-- Host Counters Grid -->
+      <section class="mb-8 grid gap-4 md:grid-cols-3">
+        <div class="bubbly-card bg-white p-6 shadow-[0_6px_0_#1e293b]">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+            <span>📚</span> कहानियाँ
+          </h3>
+          <p class="mt-3 text-4xl font-extrabold text-kid-orange"><%= storyCount %></p>
         </div>
-      <% } %>
-    </section>
+        <div class="bubbly-card bg-white p-6 shadow-[0_6px_0_#1e293b]">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+            <span>🔢</span> गणित प्रश्न
+          </h3>
+          <p class="mt-3 text-4xl font-extrabold text-kid-primary"><%= questionCount %></p>
+        </div>
+        <div class="bubbly-card bg-white p-6 shadow-[0_6px_0_#1e293b]">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1">
+            <span>📊</span> हाल की गतिविधियाँ
+          </h3>
+          <p class="mt-3 text-4xl font-extrabold text-kid-green"><%= recentActivities.length %></p>
+        </div>
+      </section>
+    <% } %>
+
+    <!-- Host-only Student Activity List -->
     <% if (isHost) { %>
-      <section class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h2 class="mb-4 text-2xl font-semibold text-slate-900">स्टूडेंट गतिविधियाँ</h2>
+      <section class="rounded-3xl border-3 border-slate-900 bg-white p-8 shadow-[0_6px_0_#1e293b]">
+        <h2 class="mb-4 text-2xl font-black text-slate-900 flex items-center gap-2">
+          <span>📊</span> स्टूडेंट गतिविधियाँ
+        </h2>
         <% if (recentActivities.length === 0) { %>
-          <p class="text-slate-500">अभी कोई गतिविधि नहीं दिखाई दे रही।</p>
+          <p class="text-slate-500 font-semibold">अभी कोई गतिविधि नहीं दिखाई दे रही।</p>
         <% } else { %>
-          <ul class="space-y-3 text-slate-600">
+          <ul class="divide-y-2 divide-slate-100 text-slate-600 font-semibold">
             <% recentActivities.forEach((activity) => { %>
-              <li class="flex flex-col gap-1 border-b border-slate-100 py-3 last:border-0 sm:flex-row sm:items-center sm:justify-between"><span><strong><%= activity.action %></strong> — <%= activity.details %></span><span class="text-sm text-slate-400"><%= new Date(activity.createdAt).toLocaleString('hi-IN') %></span></li>
+              <li class="flex flex-col gap-1 py-3.5 last:pb-0 sm:flex-row sm:items-center sm:justify-between">
+                <span>
+                  <strong class="text-slate-800"><%= activity.action %></strong> — 
+                  <span class="text-slate-500 font-medium"><%= activity.details %></span>
+                </span>
+                <span class="text-sm text-slate-400 font-medium"><%= new Date(activity.createdAt).toLocaleString('hi-IN') %></span>
+              </li>
             <% }) %>
           </ul>
         <% } %>
