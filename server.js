@@ -37,6 +37,8 @@ app.use((req, res, next) => {
 async function logActivity(userId, action, details = '') {
   if (!userId) return;
   try {
+    const user = await User.findById(userId);
+    if (!user || user.role !== 'student') return;
     await ActivityLog.create({ user: userId, action, details });
   } catch (error) {
     console.error('Activity logging failed:', error.message);

@@ -47,8 +47,17 @@ exports.renderActivity = async (req, res, next, models) => {
       return res.redirect('/dashboard');
     }
 
-    const activities = await ActivityLog.find({ user: req.session.user._id }).sort({ createdAt: -1 });
-    res.render('pages/dashboard/activity', { title: 'गतिविधि', activities });
+    const activities = await ActivityLog.find()
+      .populate('user', 'name email phone role')
+      .sort({ createdAt: -1 });
+
+    const studentActivities = activities.filter((a) => a.user && a.user.role === 'student');
+
+    res.render('pages/dashboard/activity', {
+      title: 'गतिविधि',
+      activities: studentActivities,
+      isActivityPage: true
+    });
   } catch (error) {
     next(error);
   }
