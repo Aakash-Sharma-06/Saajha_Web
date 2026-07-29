@@ -308,3 +308,177 @@ input:focus, select:focus, textarea:focus {
   font-weight: 700;
   box-shadow: 0 2px 0 #1e293b;
 }
+
+/* ──────────────────────────────────────────────
+   Stories Page Enhancement Animations
+   ────────────────────────────────────────────── */
+
+/* Staggered card entrance animation */
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.story-card-enter {
+  opacity: 0;
+  animation: slideUpFadeIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+/* Stagger delays for cards - set via inline style or nth-child */
+.story-card-enter:nth-child(1) { animation-delay: 0.06s; }
+.story-card-enter:nth-child(2) { animation-delay: 0.14s; }
+.story-card-enter:nth-child(3) { animation-delay: 0.22s; }
+.story-card-enter:nth-child(4) { animation-delay: 0.30s; }
+.story-card-enter:nth-child(5) { animation-delay: 0.38s; }
+.story-card-enter:nth-child(6) { animation-delay: 0.46s; }
+.story-card-enter:nth-child(7) { animation-delay: 0.54s; }
+.story-card-enter:nth-child(8) { animation-delay: 0.62s; }
+
+/* Soft glow on story cards on hover using category colors */
+.story-card-glow {
+  transition: box-shadow 0.3s ease, transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.story-card-glow.glow-orange:hover {
+  box-shadow: 0 14px 0 #1e293b, 0 0 24px rgba(249, 115, 22, 0.2);
+}
+.story-card-glow.glow-green:hover {
+  box-shadow: 0 14px 0 #1e293b, 0 0 24px rgba(16, 185, 129, 0.2);
+}
+.story-card-glow.glow-blue:hover {
+  box-shadow: 0 14px 0 #1e293b, 0 0 24px rgba(56, 189, 248, 0.2);
+}
+.story-card-glow.glow-yellow:hover {
+  box-shadow: 0 14px 0 #1e293b, 0 0 24px rgba(245, 158, 11, 0.2);
+}
+
+/* Emoji wiggle on card hover */
+.story-card-hover-group:hover .emoji-wiggle {
+  animation: jiggle 0.5s ease-in-out;
+}
+
+/* Category pill slide-in */
+@keyframes pillPop {
+  0% { transform: scale(0.7); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.pill-pop {
+  animation: pillPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Read-more button arrow nudge on hover */
+.story-card-hover-group:hover .btn-arrow-nudge {
+  transform: translateX(3px);
+}
+.btn-arrow-nudge {
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+
+/* Story section header title bounce-in */
+@keyframes titleBounceIn {
+  0% { opacity: 0; transform: translateY(-16px) scale(0.96); }
+  60% { transform: translateY(3px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.title-bounce-in {
+  animation: titleBounceIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Soft bounce for decorative emojis */
+@keyframes bounceSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-bounce-soft {
+  animation: bounceSoft 2.5s ease-in-out infinite;
+}
+
+/* Empty state pulse */
+@keyframes emptyPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08) rotate(3deg); }
+}
+
+.empty-state-pulse {
+  animation: emptyPulse 2.5s ease-in-out infinite;
+}
+
+/* Shimmer on search bar focus */
+@keyframes searchShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.search-shimmer:focus {
+  background: linear-gradient(90deg, #fff 30%, #fef9c3 50%, #fff 70%);
+  background-size: 200% 100%;
+  animation: searchShimmer 2s ease-in-out infinite;
+}
+
+/* Story detail page - section reveal */
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-reveal {
+  opacity: 0;
+  animation: sectionReveal 0.5s ease-out forwards;
+}
+
+.section-reveal-1 { animation-delay: 0.1s; }
+.section-reveal-2 { animation-delay: 0.25s; }
+.section-reveal-3 { animation-delay: 0.4s; }
+
+/* Audio section pulse ring when in view */
+@keyframes audioPulseRing {
+  0% { box-shadow: 0 4px 0 #1e293b, 0 0 0 0 rgba(79, 70, 229, 0.3); }
+  70% { box-shadow: 0 4px 0 #1e293b, 0 0 0 10px rgba(79, 70, 229, 0); }
+  100% { box-shadow: 0 4px 0 #1e293b, 0 0 0 0 rgba(79, 70, 229, 0); }
+}
+
+.audio-pulse-ring {
+  opacity: 0;
+  animation:
+    sectionReveal 0.5s ease-out 0.25s forwards,
+    audioPulseRing 2.5s cubic-bezier(0.4, 0, 0.6, 1) 0.8s 1;
+}
+
+/* Bookmark ribbon entrance */
+@keyframes ribbonDrop {
+  0% { transform: translateY(-100%); opacity: 0; }
+  60% { transform: translateY(4px); opacity: 1; }
+  100% { transform: translateY(0); }
+}
+
+.ribbon-drop {
+  animation: ribbonDrop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.2s;
+  transform: translateY(-100%);
+}
+
+/* Floating book-specific ornament */
+.floating-open-book {
+  position: absolute;
+  z-index: -5;
+  pointer-events: none;
+  animation: float-slow 8s ease-in-out infinite;
+  opacity: 0.4;
+}

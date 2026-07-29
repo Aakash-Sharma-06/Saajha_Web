@@ -15,44 +15,48 @@
   <svg class="floating-star select-none" style="bottom: 20%; right: 8%; fill: #38bdf8;" width="28" height="28" viewBox="0 0 24 24">
     <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
   </svg>
+  <svg class="floating-star select-none" style="top: 55%; left: 4%; fill: #a78bfa;" width="22" height="22" viewBox="0 0 24 24">
+    <path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.4 8.168L12 18.896l-7.334 3.857 1.4-8.168L.133 9.21l8.2-1.192z"/>
+  </svg>
   
   <!-- Music note ornaments -->
   <span class="floating-pencil text-4xl opacity-50 select-none" style="top: 30%; right: 12%;">🎵</span>
   <span class="floating-book text-4xl opacity-50 select-none" style="bottom: 15%; left: 10%;">🎶</span>
+  <span class="floating-open-book text-3xl select-none" style="top: 65%; right: 5%;">📖</span>
 
   <%- include('../../partials/header') %>
 
   <main class="mx-auto max-w-4xl px-4 py-8 sm:px-6 fade-in-page">
     
     <!-- Back Button -->
-    <div class="mb-6">
+    <div class="mb-6 section-reveal section-reveal-1">
       <a href="/stories" class="btn-bubbly btn-bubbly-yellow px-5 py-2 text-sm shadow-[0_4px_0_#1e293b] flex items-center gap-1.5 w-fit">
         <span>⬅️</span> कहानियों पर वापस जाएं
       </a>
     </div>
 
     <!-- The Giant Open Book Container -->
-    <article class="bubbly-card bg-amber-50/70 p-6 sm:p-10 shadow-[0_10px_0_#1e293b] relative overflow-hidden border-3 border-slate-900 rounded-[2.5rem]">
+    <article class="bubbly-card bg-amber-50/70 p-6 sm:p-10 shadow-[0_10px_0_#1e293b] relative overflow-hidden border-3 border-slate-900 rounded-[2.5rem] section-reveal section-reveal-1">
       
       <!-- Top bookmark banner -->
-      <div class="absolute top-0 right-8 bg-kid-pink border-x-3 border-b-3 border-slate-900 px-4 py-2.5 text-white font-black text-xs shadow-sm flex items-center gap-1">
+      <div class="absolute top-0 right-8 bg-kid-pink border-x-3 border-b-3 border-slate-900 px-4 py-2.5 text-white font-black text-xs shadow-sm flex items-center gap-1 ribbon-drop">
         <span>🔖</span> <%= story.category %>
       </div>
 
-      <header class="mb-6 mt-4">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+      <header class="mb-6 mt-4 section-reveal section-reveal-2">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight title-bounce-in">
           <%= story.title %>
         </h1>
-        <div class="mt-4 p-4 border-2 border-dashed border-slate-400 bg-white/70 rounded-2xl">
+        <div class="mt-4 p-4 border-2 border-dashed border-slate-400 bg-white/70 rounded-2xl hover:bg-white/90 transition-colors duration-300">
           <p class="text-slate-600 font-semibold text-sm sm:text-base leading-relaxed flex items-start gap-2">
-            <span class="text-xl shrink-0">📝</span>
+            <span class="text-xl shrink-0 animate-bounce-soft">📝</span>
             <span><strong>सारांश:</strong> <%= story.summary %></span>
           </p>
         </div>
       </header>
 
       <!-- Audio Player Box -->
-      <section class="my-8 p-5 rounded-2xl border-3 border-slate-900 bg-pastel-blue shadow-[0_4px_0_#1e293b] flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <section class="my-8 p-5 rounded-2xl border-3 border-slate-900 bg-pastel-blue shadow-[0_4px_0_#1e293b] flex flex-col md:flex-row md:items-center justify-between gap-4 audio-pulse-ring hover:bg-sky-100/80 transition-colors duration-300">
         <div class="flex items-center gap-3">
           <span class="text-3xl animate-bounce-soft select-none">🔊</span>
           <div>
@@ -69,11 +73,11 @@
       </section>
 
       <!-- Story Transcript / Reading space -->
-      <section class="prose max-w-none">
+      <section class="prose max-w-none section-reveal section-reveal-3">
         <h2 class="text-xl sm:text-2xl font-black text-slate-900 mb-4 pb-2 border-b-2 border-dashed border-slate-300 flex items-center gap-2">
-          <span>📖</span> कहानी पढ़ें
+          <span class="animate-bounce-soft">📖</span> कहानी पढ़ें
         </h2>
-        <div class="bg-white/80 p-6 sm:p-8 rounded-3xl border-2 border-slate-900 shadow-inner leading-8 text-slate-800 text-lg sm:text-xl font-semibold whitespace-pre-line">
+        <div class="bg-white/80 p-6 sm:p-8 rounded-3xl border-2 border-slate-900 shadow-inner leading-8 text-slate-800 text-lg sm:text-xl font-semibold whitespace-pre-line hover:bg-white/95 transition-colors duration-400">
           <%= story.transcript %>
         </div>
       </section>
