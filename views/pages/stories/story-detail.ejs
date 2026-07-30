@@ -29,10 +29,15 @@
   <main class="mx-auto max-w-4xl px-4 py-8 sm:px-6 fade-in-page">
     
     <!-- Back Button -->
-    <div class="mb-6 section-reveal section-reveal-1">
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3 section-reveal section-reveal-1">
       <a href="/stories" class="btn-bubbly btn-bubbly-yellow px-5 py-2 text-sm shadow-[0_4px_0_#1e293b] flex items-center gap-1.5 w-fit">
         <span>⬅️</span> कहानियों पर वापस जाएं
       </a>
+      <% if (user && user.role === 'host') { %>
+        <a href="/stories/<%= story._id %>/edit" class="btn-bubbly btn-bubbly-green px-5 py-2 text-sm shadow-[0_4px_0_#1e293b] flex items-center gap-1.5 w-fit">
+          <span>✏️</span> कहानी संपादित करें
+        </a>
+      <% } %>
     </div>
 
     <!-- The Giant Open Book Container -->

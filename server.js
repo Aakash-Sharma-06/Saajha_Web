@@ -52,8 +52,16 @@ function requireAuth(req, res, next) {
   next();
 }
 
+function requireHost(req, res, next) {
+  if (!req.session.user || req.session.user.role !== 'host') {
+    return res.redirect('/dashboard');
+  }
+  next();
+}
+
 registerRoutes(app, {
   requireAuth,
+  requireHost,
   logActivity,
   models: { User, ActivityLog, Story, MathQuestion }
 });
