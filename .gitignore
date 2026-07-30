@@ -7,3 +7,6 @@ yarn-error.log*
 .vscode/
 coverage/
 *.log
+
+# Cookie files
+*-cookies.txt
